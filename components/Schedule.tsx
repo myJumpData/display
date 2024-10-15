@@ -36,10 +36,10 @@ export default function Schedule({
         </span>
       </div>
       <span
-        className="h5 text-body-primary"
+        className="h5 text-body-primary text-center"
         style={{
           lineHeight: 1,
-          fontSize: "10vw",
+          fontSize: data?.names ? "7.5vw" : "10vw",
         }}
       >
         {data?.name}
@@ -54,17 +54,17 @@ export default function Schedule({
               height={100}
               style={{
                 objectFit: "contain",
-                height: "6vw",
-                width: "6vw",
+                height: data?.names ? "4vw" : "6vw",
+                width: data?.names ? "4vw" : "6vw",
               }}
             />
           </div>
         ) : null}
         <span
-          className="h5 text-body-secondary m-0"
+          className="h5 text-body-secondary m-0 text-center"
           style={{
             lineHeight: 1,
-            fontSize: "6vw",
+            fontSize: data?.names ? "4vw" : "6vw",
           }}
         >
           {data?.names || data?.club}
