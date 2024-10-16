@@ -6,7 +6,7 @@ import packageJson from "../../../package.json";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
-    fetch(getApi() + "/api/local-server", {
+    return fetch(getApi() + "/api/local-server", {
       method: "POST",
       mode: "no-cors",
       body: JSON.stringify({
@@ -32,6 +32,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         return res.status(200).json(r);
       });
   } else {
-    res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 }
