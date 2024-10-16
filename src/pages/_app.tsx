@@ -55,6 +55,13 @@ function Layout({ children }: any) {
               }}
             />
           </Link>
+          <ul className="navbar-nav w-100">
+            <li className="nav-item ms-auto me-auto">
+              <Link href="/display/1" className="nav-link" target="_blank">
+                Display
+              </Link>
+            </li>
+          </ul>
         </div>
       </nav>
 

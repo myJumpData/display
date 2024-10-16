@@ -1,8 +1,10 @@
 import moment from "moment";
 import { NextApiRequest, NextApiResponse } from "next";
 import os from "node:os";
+import { compareVersions } from "../../../../lib/compareVersions";
 import getApi from "../../../../lib/getApi";
 import getHWID from "../../../../lib/getHWID";
+import packageJson from "../../../../package.json";
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,8 +32,43 @@ export default async function handler(
           return null;
         })
         .catch(() => null);
+      await fetch(getApi() + "/api/local-server", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+          "x-server-hwid": getHWID(),
+          "x-server-version": packageJson.version,
+          ipAdresses: Object.entries(os.networkInterfaces())
+            ?.map(([k, v]: any) =>
+              v
+                ?.filter((x: any) => !x.internal && x.family === "IPv4")
+                ?.map((x: any) => x.address)
+            )
+            ?.flat(),
+          params: {},
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const githubVersion = await fetch(
+        "https://raw.githubusercontent.com/myJumpData/display/refs/heads/main/package.json",
+        {
+          headers: {
+            "User-Agent": "myJumpData-Display",
+          },
+        }
+      )
+        .then((r) => r.json())
+        .then((r) => r?.version);
 
       return res.status(200).json({
+        version: {
+          local: packageJson.version,
+          github: githubVersion,
+          outdated: compareVersions(packageJson.version, githubVersion),
+        },
         system: {
           network: net,
           info: Object.entries({
@@ -48,6 +85,7 @@ export default async function handler(
         },
       });
     } catch (e) {
+      console.error(e);
       return res.status(500).send("");
     }
   } else if (req.method === "POST") {

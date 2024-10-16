@@ -109,6 +109,37 @@ export default function Page() {
           </div>
         </DashboardBox>
         <DashboardBox
+          name="Version"
+          overlay={
+            <div className="d-flex flex-column justify-content-evenly align-items-center h-100">
+              <div
+                className={classNames("rounded-circle", {
+                  "bg-success": data?.version?.local === data?.version?.github,
+                  "bg-danger": data?.version?.local !== data?.version?.github,
+                })}
+                style={{
+                  height: "5rem",
+                  width: "5rem",
+                }}
+              />
+            </div>
+          }
+          image={null}
+        >
+          <table className="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Local</td>
+                <td>{data?.version?.local}</td>
+              </tr>
+              <tr>
+                <td>GitHub</td>
+                <td>{data?.version?.github}</td>
+              </tr>
+            </tbody>
+          </table>
+        </DashboardBox>
+        <DashboardBox
           name="System Information"
           overlay={
             <div className="d-flex flex-column justify-content-evenly align-items-center h-100">
@@ -135,7 +166,7 @@ export default function Page() {
             }}
           >
             {data?.system?.info?.map(({ key, value }: any, index: number) => (
-              <span key={index} className="lh-1">
+              <span key={index} className="lh-1 py-1">
                 <strong className="me-2">{key}:</strong>
                 <small>{value}</small>
               </span>
