@@ -1,10 +1,15 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
+import alphabetNumArray from "../lib/utils/alphabetNumArray";
 import alphabetsNumToNum from "../lib/utils/alphabetNumToNum";
 import fullname from "../lib/utils/fullname";
 
 export default function Live({ data, d }: any) {
-  const rows = Number(data?.liveRows) || 1;
-  const columns = Math.ceil((data?.data?.length || 0) / rows);
+  const router = useRouter();
+  const query = router?.query;
+
+  const rows = Number(data?.liveRows) || Number(query?.rows) || 1;
+  const columns = Math.ceil((data?.data?.length || query?.limit || 0) / rows);
 
   const numberFontSize = 100 / (columns * 2);
 
@@ -16,7 +21,14 @@ export default function Live({ data, d }: any) {
         gridTemplateRows: `repeat(${rows}, 1fr)`,
       }}
     >
-      {data?.data?.map((item: any, index: number) => (
+      {(
+        data?.data ||
+        Array.from({
+          length: rows * columns,
+        }).map((_, i) => ({
+          field: alphabetNumArray()?.[i],
+        }))
+      )?.map((item: any, index: number) => (
         <div
           key={index}
           className="d-flex align-items-center justify-content-center position-relative overflow-hidden border"

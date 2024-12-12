@@ -72,7 +72,8 @@ export default function Page() {
           height: `${DISPLAY_COMPONENT_HEIGHT}vh`,
         }}
       >
-        {display?.component === "Live" && display?.data ? (
+        {(display?.component === "Live" && display?.data) ||
+        display?.component === undefined ? (
           <Live data={display?.data} d={dataLive} />
         ) : display?.component === "Schedule" ? (
           <Schedule data={display?.data} />

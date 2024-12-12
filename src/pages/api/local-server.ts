@@ -30,6 +30,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       .then((r) => r.json())
       .then((r) => {
         return res.status(200).json(r);
+      })
+      .catch((e) => {
+        return res.status(500).json({});
       });
   } else {
     return res.status(405).json({ error: "Method not allowed" });
