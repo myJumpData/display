@@ -13,7 +13,7 @@ import alphabetNumArray from "./lib/utils/alphabetNumArray";
 export const PORT = 4444;
 
 const app = express();
-const server = http.createServer(app);
+const server = (http as any).createServer(app);
 const io = new Server(server);
 
 app.options(
