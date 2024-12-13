@@ -31,7 +31,7 @@ export default function Display() {
 
   useEffect(() => {
     //fetch("/api/socket");
-    socket = io("localhost:4444", {
+    socket = io("https://localhost:4444", {
       transports: ["websocket"],
     });
     return () => socket.off("connect");
