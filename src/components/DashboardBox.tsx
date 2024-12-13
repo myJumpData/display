@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import Image from "next/image";
 import { ReactNode } from "react";
 
 export default function DashboardBox({
@@ -32,10 +31,9 @@ export default function DashboardBox({
               }}
             >
               {image ? (
-                <Image
+                <img
                   src={image}
                   alt={name}
-                  fill={true}
                   className="opacity-50 object-fit-cover"
                   sizes="100%"
                 />

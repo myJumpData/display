@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "/api",
+    baseUrl: `http://localhost:4444`,
   }),
   refetchOnFocus: true,
   refetchOnMountOrArgChange: true,
@@ -11,7 +11,7 @@ const api = createApi({
   tagTypes: [],
   endpoints: (builder) => ({
     getSystemData: builder.query({
-      query: () => "/sys/data",
+      query: () => "/sys",
     }),
     getDisplay: builder.query({
       query: (params) =>

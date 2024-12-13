@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Clock } from "./display";
 
 export default function DisplayFooter({
@@ -32,13 +31,13 @@ export default function DisplayFooter({
           {heats > 0 ? `Heat ${heat}/${heats}` : null}
         </span>
       </div>
-      <Image
+      <img
         className="d-inline-block me-2"
         style={{
           height: "10vh",
           width: "auto",
         }}
-        src="/myJumpData-Banner-white.svg"
+        src="static://assets/myJumpData-Banner-white.svg"
         alt="myJumpData"
         height="360"
         width="500"

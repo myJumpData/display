@@ -1,4 +1,3 @@
-import Image from "next/image";
 import alphabetsNumToNum from "../lib/utils/alphabetNumToNum";
 
 export default function Schedule({
@@ -47,7 +46,7 @@ export default function Schedule({
       <div className="d-flex align-items-center mb-2">
         {data?.clubLogo ? (
           <div className="pe-2">
-            <Image
+            <img
               src={data?.clubLogo}
               alt={data?.club || ""}
               width={100}

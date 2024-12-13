@@ -1,15 +1,13 @@
-import Image from "next/image";
-import { useRouter } from "next/router";
+import { useParams } from "react-router";
 import alphabetNumArray from "../lib/utils/alphabetNumArray";
 import alphabetsNumToNum from "../lib/utils/alphabetNumToNum";
 import fullname from "../lib/utils/fullname";
 
 export default function Live({ data, d }: any) {
-  const router = useRouter();
-  const query = router?.query;
+  const params = useParams();
 
-  const rows = Number(data?.liveRows) || Number(query?.rows) || 1;
-  const columns = Math.ceil((data?.data?.length || query?.limit || 0) / rows);
+  const rows = Number(data?.liveRows) || Number(params?.rows) || 1;
+  const columns = Math.ceil((data?.data?.length || params?.limit || 0) / rows);
 
   const numberFontSize = 100 / (columns * 2);
 
@@ -38,7 +36,7 @@ export default function Live({ data, d }: any) {
         >
           {item?.clubLogo ? (
             <div className="position-absolute bottom-0 start-0 end-0">
-              <Image
+              <img
                 src={item?.clubLogo}
                 width={100}
                 height={100}
