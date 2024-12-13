@@ -1,6 +1,6 @@
 {
-  "name": "display2",
-  "productName": "display2",
+  "name": "myjumpdata-display",
+  "productName": "myJumpData Display",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
