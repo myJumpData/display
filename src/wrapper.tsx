@@ -19,6 +19,7 @@ export default function Wrapper() {
           <Route path="/display/:id" element={<Display />} />
           <Route path="/display/:id/:limit" element={<Display />} />
           <Route path="/display/:id/:limit/:rows" element={<Display />} />
+          <Route path="/display/:id/:limit/:rows/:skip" element={<Display />} />
         </Routes>
       </HashRouter>
     </Provider>

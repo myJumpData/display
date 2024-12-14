@@ -16,6 +16,7 @@ export default function Main() {
 
   const [cRows, setRows] = useState(2);
   const [cLimit, setLimit] = useState(4);
+  const [cSkip, setSkip] = useState(0);
 
   return (
     <div>
@@ -70,7 +71,7 @@ export default function Main() {
                       return (
                         <li key={index} className="dropdown-item border-bottom">
                           <Link
-                            to={`/display/0/${items}/${rows}`}
+                            to={`/display/0/${items}/${rows}/0`}
                             className="nav-link p-0 d-flex flex-row justify-content-between align-items-center"
                             target="_blank"
                           >
@@ -111,7 +112,7 @@ export default function Main() {
                   />
                   <li className="dropdown-item">
                     <Link
-                      to={`/display/0/${cLimit}/${cRows}`}
+                      to={`/display/0/${cLimit}/${cRows}/${cSkip}`}
                       className="nav-link p-0 d-flex flex-row justify-content-center align-items-center pt-0"
                       target="_blank"
                     >
@@ -128,7 +129,7 @@ export default function Main() {
                       >
                         {Array.from({
                           length: cLimit,
-                        }).map((item: any, index: number) => (
+                        }).map((_, index: number) => (
                           <div
                             className="border font-monospace text-center d-flex align-items-center justify-content-center"
                             key={index}
@@ -136,7 +137,7 @@ export default function Main() {
                               fontSize: `${5 / 10}rem`,
                             }}
                           >
-                            {index + 1}
+                            {index + 1 + cSkip}
                           </div>
                         ))}
                       </div>
@@ -167,6 +168,20 @@ export default function Main() {
                         max={5}
                         step={1}
                         onChange={(e) => setRows(parseInt(e.target.value))}
+                      />
+                    </div>
+                    <div>
+                      <label>
+                        <strong>Skip:</strong> {cSkip}
+                      </label>
+                      <br />
+                      <input
+                        type="range"
+                        value={cSkip}
+                        min={0}
+                        max={16}
+                        step={1}
+                        onChange={(e) => setSkip(parseInt(e.target.value))}
                       />
                     </div>
                   </li>

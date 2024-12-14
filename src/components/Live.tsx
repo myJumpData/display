@@ -8,6 +8,7 @@ export default function Live({ data, d }: any) {
 
   const rows = Number(data?.liveRows) || Number(params?.rows) || 1;
   const columns = Math.ceil((data?.data?.length || params?.limit || 0) / rows);
+  const skip = Number(data?.skip) || Number(params?.skip) || 0;
 
   const numberFontSize = 100 / (columns * 2);
 
@@ -24,7 +25,7 @@ export default function Live({ data, d }: any) {
         Array.from({
           length: rows * columns,
         }).map((_, i) => ({
-          field: alphabetNumArray()?.[i],
+          field: alphabetNumArray()?.[i + skip],
         }))
       )?.map((item: any, index: number) => (
         <div
