@@ -130,7 +130,7 @@ export default function Main() {
         >
           <div style={{ minHeight: "fit-content" }}>
             <div className="row mb-4">
-              <DashboardBox name="Network">
+              <DashboardBox name="Connection">
                 <div>
                   {data?.system?.network?.length > 0 ? (
                     data?.system?.network?.map((item: any, index: number) => (
@@ -138,7 +138,9 @@ export default function Main() {
                         <div>
                           <strong>{item.interface}</strong>
                         </div>
-                        <div className="font-monospace">{item.address}</div>
+                        <div className="font-monospace text-success">
+                          <strong>http://{item.address}:4444</strong>
+                        </div>
                       </div>
                     ))
                   ) : (
