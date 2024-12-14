@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useState } from "react";
 import { FaBars, FaCloud, FaEnvelope, FaPhone, FaServer } from "react-icons/fa";
 import { TbPlugConnected, TbPlugConnectedX } from "react-icons/tb";
 import { Link } from "react-router";
@@ -12,6 +13,9 @@ export default function Main() {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
+
+  const [cRows, setRows] = useState(2);
+  const [cLimit, setLimit] = useState(4);
 
   return (
     <div>
@@ -36,9 +40,9 @@ export default function Main() {
               }}
             />
           </Link>
-          <div>
+          <div className="d-flex justify-content-center w-100">
             <ul className="navbar-nav w-100">
-              <li className="nav-item ms-auto me-auto">
+              <li className="nav-item">
                 <Link to="/display/1" className="nav-link" target="_blank">
                   Display 1
                 </Link>
@@ -49,7 +53,7 @@ export default function Main() {
                   role="button"
                   data-bs-toggle="dropdown"
                 >
-                  Offline Display Templates
+                  Offline Display
                 </span>
                 <ul className="dropdown-menu">
                   {[
@@ -59,22 +63,12 @@ export default function Main() {
                     [4, 2],
                     [5, 2],
                     [6, 2],
-                    [7, 2],
-                    [7, 3],
-                    [8, 2],
-                    [8, 3],
-                    [9, 3],
                   ].map(
                     ([items, rows]: number[], index: number, a: number[][]) => {
                       const cols = Math.ceil((items || 0) / rows);
                       const height = 3;
                       return (
-                        <li
-                          key={index}
-                          className={classNames("dropdown-item", {
-                            "border-bottom": a.length - 1 !== index,
-                          })}
-                        >
+                        <li key={index} className="dropdown-item border-bottom">
                           <Link
                             to={`/display/0/${items}/${rows}`}
                             className="nav-link p-0 d-flex flex-row justify-content-between align-items-center"
@@ -109,6 +103,73 @@ export default function Main() {
                       );
                     }
                   )}
+                  <hr
+                    className="my-0"
+                    style={{
+                      borderWidth: ".25rem",
+                    }}
+                  />
+                  <li className="dropdown-item">
+                    <Link
+                      to={`/display/0/${cLimit}/${cRows}`}
+                      className="nav-link p-0 d-flex flex-row justify-content-center align-items-center pt-0"
+                      target="_blank"
+                    >
+                      <div
+                        className="d-grid text-white bg-black border border-info"
+                        style={{
+                          gridTemplateColumns: `repeat(${Math.ceil(
+                            cLimit / cRows
+                          )}, 1fr)`,
+                          gridTemplateRows: `repeat(${cRows}, 1fr)`,
+                          height: `${5}rem`,
+                          width: `${5 * (16 / 9)}rem`,
+                        }}
+                      >
+                        {Array.from({
+                          length: cLimit,
+                        }).map((item: any, index: number) => (
+                          <div
+                            className="border font-monospace text-center d-flex align-items-center justify-content-center"
+                            key={index}
+                            style={{
+                              fontSize: `${5 / 10}rem`,
+                            }}
+                          >
+                            {index + 1}
+                          </div>
+                        ))}
+                      </div>
+                    </Link>
+                    <div>
+                      <label>
+                        <strong>Limit:</strong> {cLimit}
+                      </label>
+                      <br />
+                      <input
+                        type="range"
+                        value={cLimit}
+                        min={1}
+                        max={16}
+                        step={1}
+                        onChange={(e) => setLimit(parseInt(e.target.value))}
+                      />
+                    </div>
+                    <div>
+                      <label>
+                        <strong>Rows:</strong> {cRows}
+                      </label>
+                      <br />
+                      <input
+                        type="range"
+                        value={cRows}
+                        min={1}
+                        max={5}
+                        step={1}
+                        onChange={(e) => setRows(parseInt(e.target.value))}
+                      />
+                    </div>
+                  </li>
                 </ul>
               </li>
             </ul>
