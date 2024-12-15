@@ -1,4 +1,5 @@
 import { MakerSquirrel } from "@electron-forge/maker-squirrel";
+import { MakerZIP } from "@electron-forge/maker-zip";
 import { AutoUnpackNativesPlugin } from "@electron-forge/plugin-auto-unpack-natives";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { WebpackPlugin } from "@electron-forge/plugin-webpack";
@@ -12,23 +13,23 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     icon: "./src/assets/icon",
-    osxSign: {},
+    //osxSign: {},
   },
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
       setupIcon: "./src/assets/icon.ico",
     }),
-    //new MakerZIP({}, ["darwin"]),
+    new MakerZIP({}, ["darwin"]),
     //new MakerRpm({}),
     //new MakerDeb({}),
-    {
+    /* {
       name: "@electron-forge/maker-dmg",
       config: {
         format: "ULFO",
         icon: "./src/assets/icon.icns",
       },
-    },
+    }, */
   ],
   plugins: [
     new AutoUnpackNativesPlugin({}),
